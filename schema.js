@@ -18,7 +18,7 @@ const Evaluation = gql`
     deleted: Boolean!
     entityId: ID!
     entityType: SpotifyEntityEnum!
-    grade: Float!
+    grade: Int!
     track: SpotifyTrack
     userId: ID!
   }
@@ -158,7 +158,7 @@ const Mutation = gql`
     deleteEvaluation(evaluationId: ID!): Evaluation
     updateEvaluation(
       evaluationId: ID!
-      grade: Float!
+      grade: Int!
       comment: String
     ): Evaluation
 
