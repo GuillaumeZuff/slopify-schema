@@ -26,12 +26,15 @@ const Evaluation = gql`
 
 const AggregatedEvaluation = gql`
   type AggregatedEvaluation {
-    id: ID!
+    _id: ID!
+    album: SpotifyAlbum
+    artist: SpotifyArtist
     averageGrade: Float!
     entityId: ID!
     entityType: SpotifyEntityEnum!
-    evaluationsCount: Int!
     evaluations(limit: Int, offset: Int): [Evaluation]
+    totalGrades: Int!
+    track: SpotifyTrack
   }
 `;
 
@@ -135,6 +138,8 @@ const Query = gql`
   scalar DATE
   type Query {
     getUser: User
+
+    bestOf(entityType: ID!, limit: Int): [AggregatedEvaluation]
 
     myEvaluation(entityId: ID!, entityType: ID!): Evaluation
     myEvaluations(entityIds: [ID]!, entityType: ID!): [Evaluation]
