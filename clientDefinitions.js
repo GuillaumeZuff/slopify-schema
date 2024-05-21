@@ -1,3 +1,38 @@
+const ALBUM_FIELDS = `
+    id
+    artists {
+    id
+    name
+    }
+    name
+    images {
+    url
+    }
+    type
+`;
+
+const ARTIST_FIELDS = `
+    id
+    images {
+    url
+    }
+    name
+    type
+`;
+
+const TRACK_FIELDS = `
+    id
+    album {
+    id
+    images {
+        url
+    }
+    name
+    }
+    name
+    type
+`;
+
 const SEARCH_SPOTIFY = gql`
   mutation searchSpotify(
     $query: String!
