@@ -148,12 +148,19 @@ const Query = gql`
     aggregatedEvaluations(
       entityIds: [ID]!
       entityType: ID!
-    ): AggregatedEvaluation
+    ): [AggregatedEvaluation]
   }
 `;
 
 const Mutation = gql`
   type Mutation {
+    searchSpotify(
+      query: String!
+      market: String!
+      limit: Int
+      offset: Int
+    ): SpotifySearchResult
+
     createEvaluation(
       entityId: ID!
       entityType: ID!
@@ -166,13 +173,6 @@ const Mutation = gql`
       grade: Int!
       comment: String
     ): Evaluation
-
-    searchSpotify(
-      query: String!
-      market: String!
-      limit: Int
-      offset: Int
-    ): SpotifySearchResult
 
     setFirstname(firstname: String!): User
     setProfile(firstname: String!): User
