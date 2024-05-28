@@ -21,6 +21,7 @@ const Evaluation = gql`
     grade: Int!
     track: SpotifyTrack
     userId: ID!
+    userRef: UserRef
   }
 `;
 
@@ -127,6 +128,14 @@ const UserProfile = gql`
   }
 `;
 
+const UserRef = gql`
+  type UserRef {
+    _id: ID!
+    firstname: String
+    lastname: String
+  }
+`;
+
 const User = gql`
   type User {
     _id: ID!
@@ -143,6 +152,9 @@ const Query = gql`
 
     myEvaluation(entityId: ID!, entityType: ID!): Evaluation
     myEvaluations(entityIds: [ID]!, entityType: ID!): [Evaluation]
+    allMyEvaluations(entityType: ID!): [Evaluation]
+
+    lastEvaluations(entityType: ID, limit: Int): [Evaluation]
 
     aggregatedEvaluation(entityId: ID!, entityType: ID!): AggregatedEvaluation
     aggregatedEvaluations(
@@ -174,8 +186,7 @@ const Mutation = gql`
       comment: String
     ): Evaluation
 
-    setFirstname(firstname: String!): User
-    setProfile(firstname: String!): User
+    setProfile(firstname: String!, lastname: String!): User
   }
 `;
 
@@ -195,6 +206,7 @@ const typeDefs = [
   SpotifyTracksResult,
   User,
   UserProfile,
+  UserRef,
 ];
 
 export default typeDefs;
